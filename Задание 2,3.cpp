@@ -7,7 +7,7 @@ using namespace std;
 int main()
 {
     setlocale(LC_ALL, "Russian");
-    LinkedList<int> list;
+    LinkedList list;
     list.Add(2);
     list.Add(1);
     list.Add(2);
