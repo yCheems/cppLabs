@@ -3,19 +3,18 @@ template<typename T>
 class LinkedList
 {
 private:
-	template<typename T>
 	class Node
 	{
 	public:
 		Node* pNext;
-		T data;
-		Node(T data=T(), Node* pNext=nullptr)
+		int data;
+		Node(int data= 0, Node* pNext=nullptr)
 		{
 			this->data = data;
 			this->pNext = pNext;
 		}
 	};
-	Node<T> *head;	
+	Node *head;	
 public:
 	int Size;
 	LinkedList()
@@ -23,25 +22,25 @@ public:
 		Size = 0;
 		head = nullptr;
 	}
-	void Add(T data)
+	void Add(int data)
 	{
 		if (head == nullptr)
 		{
-			head = new Node<T>(data);
+			head = new Node(data);
 		}
 		else
 		{
-			Node<T> *current = this->head;
+			Node *current = this->head;
 			while (current->pNext != nullptr)
 				current = current->pNext;
-			current->pNext = new Node<T>(data);
+			current->pNext = new Node(data);
 		}
 		Size++; 
 	}
-	T& operator[](const int index)
+	int& operator[](const int index)
 	{
 		int counter = 0;
-		Node<T> *current = this->head;
+		Node *current = this->head;
 		while (current != nullptr)
 		{
 			{
@@ -54,7 +53,7 @@ public:
 	}
 	void RemoveDuples()
 	{
-		Node<T>* t, * p, * i, * prev;
+		Node* t, * p, * i, * prev;
 		for (p = head; p != nullptr; p = p->pNext)
 		{
 			prev = p;
@@ -63,7 +62,7 @@ public:
 				if (i->data == p->data)
 				{
 					t = prev->pNext = i->pNext;
-					free(i);
+					delete(i);
 					i = t;
 					Size--;
 					continue;
@@ -73,10 +72,10 @@ public:
 			}
 		}
 	}
-	T FindFromEnd(int k)
+	int FindFromEnd(int k)
 	{
-		Node<T> *first = head;
-		Node<T> *second = head;
+		Node *first = head;
+		Node *second = head;
 		int counter = 1;
 		while (first->pNext != nullptr)
 		{
@@ -91,7 +90,7 @@ public:
 	{
 		while (Size)
 		{
-			Node<T>* temp = head;
+			Node* temp = head;
 			head = head->pNext;
 			delete temp;
 			Size--;
