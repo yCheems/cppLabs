@@ -2,21 +2,13 @@
 using namespace std;
 int Max(int* fp, int* lp)
 {
-	for (int i = 0; i < 6; i++)
+	int* max = fp;
+	while (fp != lp+1)
 	{
-		if (fp == lp)
-		{
-			return *fp;
-		}
-		int p = *fp;
+		if (*fp > *max) max = fp;
 		fp++;
-		if (p > * fp)
-		{
-			int q = p;
-			p = *fp;
-			*fp = q;
-		}
 	}
+	return *max;
 }
 void Sort(int* fp, int* lp)
 {	
@@ -42,9 +34,9 @@ int main()
 {
 	int A[6]{ 2, 1, 5, 4, 10, 8 };
 	int* fp = &A[0];
-	int* lp = &A[5];	
-	Sort(fp, lp);
+	int* lp = &A[5];
 	cout << Max(fp, lp) << endl;
+	Sort(fp, lp);	
 	for (int i = 0; i <= 5; i++)
 		cout << A[i] << ' ';
 	return 0;
