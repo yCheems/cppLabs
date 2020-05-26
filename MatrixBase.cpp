@@ -33,11 +33,18 @@ void MatrixBase::operator*=(int iMulti)
 void MatrixBase::operator+=(MatrixBase iAdd)
 {
 	if (m_size != iAdd.size())
-		throw std::exception("Для сложения необходимы матрицы одинакового размера.");
+		throw std::exception("Г„Г«Гї Г±Г«Г®Г¦ГҐГ­ГЁГї Г­ГҐГ®ГЎГµГ®Г¤ГЁГ¬Г» Г¬Г ГІГ°ГЁГ¶Г» Г®Г¤ГЁГ­Г ГЄГ®ГўГ®ГЈГ® Г°Г Г§Г¬ГҐГ°Г .");
 	else
 		for (unsigned int i = 0; i < m_size; i++)
 			for (unsigned int j = 0; j < m_size; j++)
 				matrix[i][j] += iAdd.matrix[i][j];
+}
+
+void MatrixBase::Fill()
+{
+	for (unsigned int i = 0; i < m_size; i++)
+		for (unsigned int j = 0; j < m_size; j++)
+			matrix[i][j] = 1 + j + i * m_size;
 }
 
 ostream& operator<<(ostream& os, MatrixBase& iMatrix)
