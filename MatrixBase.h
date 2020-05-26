@@ -14,6 +14,7 @@ public:
 	virtual int& elementAddress(unsigned int i, unsigned int j);
 	void operator*=(int iMult);
 	void operator+=(MatrixBase iAdd);
-	friend ostream& operator<<(ostream& os, MatrixBase& iMatrix); // äëÿ ðàáîòû cout íåîáõîäèìî áûëî óêàçàòü ostream âìåñòî ofstream
+	void Fill();
+	friend ostream& operator<<(ostream& os, MatrixBase& iMatrix); // Ã¤Ã«Ã¿ Ã°Ã Ã¡Ã®Ã²Ã» cout Ã­Ã¥Ã®Ã¡ÃµÃ®Ã¤Ã¨Ã¬Ã® Ã¡Ã»Ã«Ã® Ã³ÃªÃ Ã§Ã Ã²Ã¼ ostream Ã¢Ã¬Ã¥Ã±Ã²Ã® ofstream
 };
 
