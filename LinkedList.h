@@ -1,7 +1,7 @@
 #pragma once
 class LinkedList
 {
-public:
+private:
 	class Node
 	{
 	public:
