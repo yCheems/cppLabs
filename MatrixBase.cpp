@@ -1,50 +1,29 @@
 #include "MatrixBase.h"
+#include <iostream>
 using namespace std;
-MatrixBase::MatrixBase(unsigned int iSize)
-{
-	m_size = iSize;
-	matrix = new int* [m_size];
-	for (unsigned int i = 0; i < m_size; i++)
-		matrix[i] = new int[m_size];
-}
+
+MatrixBase::MatrixBase(unsigned int iSize) : m_size(iSize) {}
 
 unsigned int MatrixBase::size() const
 {
 	return m_size;
 }
 
-int MatrixBase::element(unsigned int i, unsigned int j) const
-{
-	return matrix[i][j];
-}
-
-int& MatrixBase::elementAddress(unsigned int i, unsigned int j)
-{
-	return matrix[i][j];
-}
-
 void MatrixBase::operator*=(int iMulti)
 {
 	for (unsigned int i = 0; i < m_size; i++)
 		for (unsigned int j = 0; j < m_size; j++)
-			matrix[i][j] *= iMulti;
+			elementAddress(i, j) = iMulti * element(i,j);
 }
 
-void MatrixBase::operator+=(MatrixBase iAdd)
+void MatrixBase::operator+=(MatrixBase& iAdd)
 {
 	if (m_size != iAdd.size())
-		throw std::exception("Ã„Ã«Ã¿ Ã±Ã«Ã®Ã¦Ã¥Ã­Ã¨Ã¿ Ã­Ã¥Ã®Ã¡ÃµÃ®Ã¤Ã¨Ã¬Ã» Ã¬Ã Ã²Ã°Ã¨Ã¶Ã» Ã®Ã¤Ã¨Ã­Ã ÃªÃ®Ã¢Ã®Ã£Ã® Ã°Ã Ã§Ã¬Ã¥Ã°Ã .");
+		throw std::exception("Äëÿ ñëîæåíèÿ íåîáõîäèìû ìàòðèöû îäèíàêîâîãî ðàçìåðà.");
 	else
 		for (unsigned int i = 0; i < m_size; i++)
 			for (unsigned int j = 0; j < m_size; j++)
-				matrix[i][j] += iAdd.matrix[i][j];
-}
-
-void MatrixBase::Fill()
-{
-	for (unsigned int i = 0; i < m_size; i++)
-		for (unsigned int j = 0; j < m_size; j++)
-			matrix[i][j] = 1 + j + i * m_size;
+				elementAddress(i, j) = iAdd.element(i, j) + element(i,j);
 }
 
 ostream& operator<<(ostream& os, MatrixBase& iMatrix)

@@ -5,16 +5,14 @@ class MatrixBase
 {
 public:
 	unsigned int size() const;
-	virtual int element(unsigned int i, unsigned int j) const;
-	virtual int& elementAddress(unsigned int i, unsigned int j);
+	virtual int element(unsigned int i, unsigned int j) const=0;
+	virtual int& elementAddress(unsigned int i, unsigned int j)=0;
 	void operator*=(int iMult);
-	void operator+=(MatrixBase iAdd);
-	void Fill();
-	friend ostream& operator<<(ostream& os, MatrixBase& iMatrix); // Ã¤Ã«Ã¿ Ã°Ã Ã¡Ã®Ã²Ã» cout Ã­Ã¥Ã®Ã¡ÃµÃ®Ã¤Ã¨Ã¬Ã® Ã¡Ã»Ã«Ã® Ã³ÃªÃ Ã§Ã Ã²Ã¼ ostream Ã¢Ã¬Ã¥Ã±Ã²Ã® ofstream
+	void operator+=(MatrixBase& iAdd);
+	friend ostream& operator<<(ostream& os, MatrixBase& iMatrix); // äëÿ ðàáîòû cout íåîáõîäèìî áûëî óêàçàòü ostream âìåñòî ofstream
+protected:
+	MatrixBase(unsigned int iSize);	
 private:
 	unsigned int m_size;
-protected:
-	MatrixBase(unsigned int iSize);
-	int** matrix = nullptr;
 };
 
