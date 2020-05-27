@@ -1,6 +1,5 @@
 #pragma once
 #include "MatrixBase.h"
-#include "Matrix2D.h"
 class Matrix3D : public MatrixBase
 {
 public:
