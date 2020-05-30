@@ -1,58 +1,42 @@
 #include "LinkedList.h"		
 	LinkedList::LinkedList()
 	{
-		Size = 0;
 		head = nullptr;
 	}
 	void LinkedList::Add(int data)
 	{
+		Node* node = new Node;
+		node->data = data;
+		node->pNext = nullptr;
 		if (head == nullptr)
-		{
-			head = new Node(data);
-		}
+			head = node;
 		else
 		{
-			Node* current = this->head;
+			Node* current = head;
 			while (current->pNext != nullptr)
 				current = current->pNext;
-			current->pNext = new Node(data);
-		}
-		Size++;
-	}
-	int& LinkedList::operator[](const int index)
-	{
-		int counter = 0;
-		Node* current = this->head;
-		while (current != nullptr)
-		{
-			{
-				if (counter == index)
-					return current->data;
-				current = current->pNext;
-				counter++;
-			}
+			current->pNext = node;
 		}
 	}
 	void LinkedList::RemoveDuples()
 	{
-		Node* t, * p, * i, * prev;
-		for (p = head; p != nullptr; p = p->pNext)
+		Node* node = head;
+		while (node != nullptr && node->pNext != nullptr)
 		{
-			prev = p;
-			for (i = p->pNext; i != nullptr; )
+			Node* current = node;
+			while (current->pNext != nullptr)
 			{
-				if (i->data == p->data)
+				current = current->pNext;
+				if (current->data == node->data)
 				{
-					t = prev->pNext = i->pNext;
-					delete(i);
-					i = t;
-					Size--;
-					continue;
-				}
-				prev = i;
-				i = i->pNext;
-			}
-		}
+					Node* t = head;
+					while (t->pNext != current)
+						t = t->pNext;
+					t->pNext = current->pNext;
+				};
+			};
+			node = node->pNext;
+		};
 	}
 	int LinkedList::FindFromEnd(int k)
 	{
@@ -68,6 +52,16 @@
 		}
 		return second->data;
 	}
+	void LinkedList::printList()
+	{
+		Node* current = head;
+		cout << current->data << "  ";
+		while (current->pNext != nullptr)
+		{
+			current = current->pNext;
+			cout << current->data << "  ";
+		}
+	}
 	void LinkedList::Clear()
 	{
 		while (Size)
@@ -75,6 +69,5 @@
 			Node* temp = head;
 			head = head->pNext;
 			delete temp;
-			Size--;
 		}
 	}
