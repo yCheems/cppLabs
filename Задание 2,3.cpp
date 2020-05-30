@@ -18,14 +18,12 @@ int main()
     list.Add(4);
     list.Add(13);
     list.Add(1);
-    for (int i = 0; i < list.Size; i++)
-        cout << list[i] << endl;
+    list.printList();
     cout << "Четвертый элемент с конца: "<< endl << list.FindFromEnd(4) << endl;
     cout << endl;
     list.RemoveDuples();
     cout << "Список без повторений:" << endl;
-    for (int i = 0; i < list.Size; i++)
-        cout << list[i] << endl;
+    list.printList();
     cout <<"Второй элемент с конца: " << endl << list.FindFromEnd(2);
     list.Clear();
 }
