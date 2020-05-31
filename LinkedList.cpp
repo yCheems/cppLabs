@@ -64,7 +64,7 @@
 	}
 	void LinkedList::Clear()
 	{
-		while (Size)
+		while (head != nullptr)
 		{
 			Node* temp = head;
 			head = head->pNext;
